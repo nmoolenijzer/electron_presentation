@@ -1,5 +1,11 @@
 # Electron Workshop
 
+## Screenshot
+
+![](screen.png)
+
+## Description
+
 **A quick way to see Electron in action.**
 
 We are going to build a minimal Electron application based on the [Quick Start Guide](http://electron.atom.io/docs/tutorial/quick-start) within the Electron documentation.
@@ -118,7 +124,7 @@ Again, include it in `index.html`, it's just like a web app! Except this time yo
     require('./renderer.js')
 </script>
 ```
-towards the end of `index.html` file, inside `<html>` and after `<body>`. 
+towards the end of `index.html` file, inside `<html>` and after `<body>`.
 
 Finally
 ```bash
@@ -136,7 +142,7 @@ Now we're going to set up global keyboard shortcut in `main.js`. First we do thi
 const globalShortcut = electron.globalShortcut
 ```
 
-Now go to `app.on('ready')`. Inside here, we want to set up a const `ret` to which we register a keyboard shortcut. This means that once the electron app is initialized, it assigns a function to whatever shortcut we give it. 
+Now go to `app.on('ready')`. Inside here, we want to set up a const `ret` to which we register a keyboard shortcut. This means that once the electron app is initialized, it assigns a function to whatever shortcut we give it.
 You would register a keyboard shortcut for ctrl/cmd + E as follows:
 
 ```javascript
@@ -197,16 +203,16 @@ Now we're going to register a new shortcut in our `app.on('ready')` file. Put in
   });
 ```
 
-What's going on here? Well, instead of executing a function, this keyboard shortcut seems to instead send the string `('showSurprise')` somewhere. In fact, it's going to send this string to our renderer.js file, so let's make sure that our renderer.js file can receive this string and act appropriately once it does. 
+What's going on here? Well, instead of executing a function, this keyboard shortcut seems to instead send the string `('showSurprise')` somewhere. In fact, it's going to send this string to our renderer.js file, so let's make sure that our renderer.js file can receive this string and act appropriately once it does.
 
 
-In order to make sure that our `renderer.js` which is actually run in our `index.html` can receive the prompts from our keyboard shortcut, at the top of `renderer.js`, we want to declare the `ipc` variable. 
+In order to make sure that our `renderer.js` which is actually run in our `index.html` can receive the prompts from our keyboard shortcut, at the top of `renderer.js`, we want to declare the `ipc` variable.
 
 ```javascript
 const ipc = require('electron').ipcRenderer
 ```
 
-We can now write a function that runs every time our `renderer.js` receives the prompt from the keyboard shortcut. 
+We can now write a function that runs every time our `renderer.js` receives the prompt from the keyboard shortcut.
 
 ```javascript
 ipc.on("showSurprise", (event, data) => {
@@ -218,7 +224,7 @@ ipc.on("showSurprise", (event, data) => {
 })
 ```
 
-The `ipc.on(String)` is what allows our function to listen for ipc prompts in the form of Strings sent by main.js. 
+The `ipc.on(String)` is what allows our function to listen for ipc prompts in the form of Strings sent by main.js.
 
 Now try running Electron and pressing Ctrl/Cmd + P. You should see a change at the bottom of the window. Which is great, as you can now bind keyboard shortcuts that execute your very own javascript!
 
